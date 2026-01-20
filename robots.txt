@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block backend scripts to prevent errors in search results
+Disallow: /send-email.php
+
+# Block specific asset folders if they contain private info (Optional, usually keep empty for SEO)
+# Disallow: /private/
+
+# Point Google to your Sitemap (Crucial for fast indexing)
+Sitemap: https://landamyanmar.com/sitemap.xml
