@@ -21,17 +21,30 @@
 
     <nav class="main-navbar">
         <div class="container nav-inner">
+            
             <a href="index.html" class="logo">
                 <img src="img/lada-trading-logo.png" alt="Landa General Trading">
             </a>
-            <div class="nav-menu">                
+
+            <div class="nav-menu" id="navMenu">
                 <div class="nav-item"><a href="rice-export.html" class="nav-link">Export (Rice)</a></div>
                 <div class="nav-item"><a href="distribution.html" class="nav-link">Distribution</a></div>
                 <div class="nav-item"><a href="import.html" class="nav-link">Import</a></div>
                 <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
                 <div class="nav-item"><a href="contact.html" class="nav-link" style="color: var(--landa-red);">Contact</a></div>
+                <a href="contact.html" class="btn-primary mobile-only-btn">Request Quote</a>
             </div>
-            <a href="contact.html" class="btn-primary">Partner With Us</a>
+
+            <div class="nav-right">
+                <a href="contact.html" class="btn-primary desktop-only-btn">Request Quote</a>
+                
+                <div class="hamburger" id="hamburgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
         </div>
     </nav>
 
@@ -232,45 +245,67 @@
     </footer>
 
     <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        /* =========================================
+           1. CONTACT FORM HANDLING
+           ========================================= */
         const form = document.getElementById("contactForm");
         const status = document.getElementById("form-status");
 
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            const data = new FormData(form);
-            const btn = form.querySelector('.btn-submit');
-            
-            // Visual Feedback
-            btn.innerText = "Sending...";
-            btn.disabled = true;
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
+        if (form) {
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const data = new FormData(form);
+                const btn = form.querySelector('.btn-submit');
                 
-                if (response.ok) {
+                // Visual Feedback
+                btn.innerText = "Sending...";
+                btn.disabled = true;
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        status.style.display = 'block';
+                        status.innerText = "Message sent successfully! We will contact you shortly.";
+                        status.style.color = "green";
+                        form.reset(); // Clear the form
+                    } else {
+                        const result = await response.json(); // Try to get error detail
+                        status.style.display = 'block';
+                        status.innerText = result.message || "Oops! There was a problem sending your message.";
+                        status.style.color = "red";
+                    }
+                } catch (error) {
                     status.style.display = 'block';
-                    status.innerText = "Message sent successfully! We will contact you shortly.";
-                    status.style.color = "green";
-                    form.reset(); // Clear the form
-                } else {
-                    status.style.display = 'block';
-                    status.innerText = "Oops! There was a problem sending your message.";
-                    status.style.color = "red";
+                    status.innerText = "Network error. Please try again later.";
+                } finally {
+                    btn.innerText = "SEND MESSAGE";
+                    btn.disabled = false;
                 }
-            } catch (error) {
-                status.style.display = 'block';
-                status.innerText = "Network error. Please try again later.";
-            } finally {
-                btn.innerText = "SEND MESSAGE";
-                btn.disabled = false;
-            }
-        });
+            });
+        }
+
+        /* =========================================
+           2. MOBILE MENU TOGGLE
+           ========================================= */
+        const hamburger = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+    });
     </script>
     
 </body>

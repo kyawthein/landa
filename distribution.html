@@ -20,19 +20,32 @@
 </head>
 <body>
 
-<nav class="main-navbar">
+    <nav class="main-navbar">
         <div class="container nav-inner">
+            
             <a href="index.html" class="logo">
                 <img src="img/lada-trading-logo.png" alt="Landa General Trading">
             </a>
-            <div class="nav-menu">
+
+            <div class="nav-menu" id="navMenu">
                 <div class="nav-item"><a href="rice-export.html" class="nav-link">Export (Rice)</a></div>
                 <div class="nav-item"><a href="distribution.html" class="nav-link" style="color: var(--landa-red);">Distribution</a></div>
                 <div class="nav-item"><a href="import.html" class="nav-link">Import</a></div>
                 <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
                 <div class="nav-item"><a href="contact.html" class="nav-link">Contact</a></div>
+                <a href="contact.html" class="btn-primary mobile-only-btn">Request Quote</a>
             </div>
-            <a href="contact.html" class="btn-primary">Partner With Us</a>
+
+            <div class="nav-right">
+                <a href="contact.html" class="btn-primary desktop-only-btn">Request Quote</a>
+                
+                <div class="hamburger" id="hamburgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
         </div>
     </nav>
 
@@ -262,5 +275,17 @@
         </div>
     </footer>
 
+<script>
+    // MOBILE MENU TOGGLE
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        
+        // Optional: Animate Hamburger to "X"
+        // You can add CSS for .hamburger.active spans if you want fancy animations
+    });
+</script>
 </body>
 </html>

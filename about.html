@@ -22,17 +22,30 @@
 
     <nav class="main-navbar">
         <div class="container nav-inner">
+            
             <a href="index.html" class="logo">
                 <img src="img/lada-trading-logo.png" alt="Landa General Trading">
             </a>
-            <div class="nav-menu">                
+
+            <div class="nav-menu" id="navMenu">
                 <div class="nav-item"><a href="rice-export.html" class="nav-link">Export (Rice)</a></div>
                 <div class="nav-item"><a href="distribution.html" class="nav-link">Distribution</a></div>
                 <div class="nav-item"><a href="import.html" class="nav-link">Import</a></div>
                 <div class="nav-item"><a href="about.html" class="nav-link" style="color: var(--landa-red);">About Us</a></div>
                 <div class="nav-item"><a href="contact.html" class="nav-link">Contact</a></div>
+                <a href="contact.html" class="btn-primary mobile-only-btn">Request Quote</a>
             </div>
-            <a href="contact.html" class="btn-primary">Partner With Us</a>
+
+            <div class="nav-right">
+                <a href="contact.html" class="btn-primary desktop-only-btn">Request Quote</a>
+                
+                <div class="hamburger" id="hamburgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
         </div>
     </nav>
 
@@ -275,62 +288,70 @@
         </div>
     </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    
-    // Select all the number elements
-    const counters = document.querySelectorAll('.stat-box .num');
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
 
-    // Create the Observer (The "Scroll Watcher")
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            // If the element is visible in the viewport...
-            if (entry.isIntersecting) {
-                const counter = entry.target;
-                
-                // Get the target number and suffix from HTML
-                const target = +counter.getAttribute('data-count'); // The "+" converts string to number
-                const suffix = counter.getAttribute('data-suffix');
-                
-                // Animation settings
-                const duration = 2000; // 2 seconds to finish
-                const frameRate = 16;  // ~60 frames per second
-                const totalFrames = duration / frameRate;
-                const increment = target / totalFrames;
-                
-                let currentCount = 0;
+        /* =========================================
+           1. MOBILE MENU TOGGLE
+           ========================================= */
+        const hamburger = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('navMenu');
 
-                // The Counting Function
-                const updateCount = () => {
-                    currentCount += increment;
+        // Only run this if the hamburger element actually exists on the page
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
 
-                    if (currentCount < target) {
-                        // Keep counting (Math.ceil avoids decimals)
-                        counter.innerText = Math.ceil(currentCount) + suffix;
-                        requestAnimationFrame(updateCount);
-                    } else {
-                        // Finished! Ensure it lands exactly on the target
-                        counter.innerText = target + suffix;
+        /* =========================================
+           2. STATS COUNTER ANIMATION
+           ========================================= */
+        const counters = document.querySelectorAll('.stat-box .num');
+
+        // Only run this if there are stat numbers to animate
+        if (counters.length > 0) {
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        
+                        const target = +counter.getAttribute('data-count');
+                        const suffix = counter.getAttribute('data-suffix');
+                        
+                        const duration = 2000; 
+                        const frameRate = 16;  
+                        const totalFrames = duration / frameRate;
+                        const increment = target / totalFrames;
+                        
+                        let currentCount = 0;
+
+                        const updateCount = () => {
+                            currentCount += increment;
+
+                            if (currentCount < target) {
+                                counter.innerText = Math.ceil(currentCount) + suffix;
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                counter.innerText = target + suffix;
+                            }
+                        };
+
+                        updateCount();
+                        observer.unobserve(counter);
                     }
-                };
+                });
+            }, {
+                threshold: 0.5
+            });
 
-                // Start Counting
-                updateCount();
-                
-                // Stop watching this element (so it only runs once)
-                observer.unobserve(counter);
-            }
-        });
-    }, {
-        threshold: 0.5 // Trigger when 50% of the item is visible
-    });
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+        }
 
-    // Attach observer to each counter
-    counters.forEach(counter => {
-        observer.observe(counter);
     });
-});
-</script>
+    </script>
 
 </body>
 </html>
