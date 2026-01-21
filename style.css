@@ -2966,6 +2966,44 @@ a.split-card:hover {
         padding-bottom: 40px;
     }
 
+    /* 1. Reduce Title Sizes Globally (All Pages) */
+    h1 {
+        font-size: 2.4rem !important; /* Was 3.5rem+, now fits phone screens */
+        line-height: 1.2 !important;
+        margin-bottom: 15px !important;
+    }
+
+    h2 {
+        font-size: 1.8rem !important; /* Smaller Section Headers */
+        line-height: 1.3 !important;
+    }
+
+    /* 2. Fix Hero Spacing (Prevents Header Overlap) */
+    /* Target ALL hero sections to ensure safety */
+    .dist-hero, .import-hero, .export-hero, .about-hero, .contact-hero, .hero {
+        padding-top: 140px !important; /* Pushes content down below the logo/menu */
+        height: auto !important;       /* Allows content to grow */
+        min-height: 100vh !important;  /* Ensures it covers full screen height */
+        background-attachment: scroll !important; /* Fixes background jitter on phones */
+    }
+
+    /* 3. Distribution Page Specific Adjustments */
+    .hero-content-dist {
+        padding-bottom: 60px; /* Adds breathing room at the bottom */
+    }
+
+    /* Fix the Stats Box stacking */
+    .dist-stats-row {
+        display: grid !important;
+        grid-template-columns: 1fr; /* Stack vertically */
+        gap: 15px;
+        width: 100%;
+        margin-top: 30px;
+        padding: 25px !important;
+    }
+
+    .stat-separator { display: none !important; } /* Hide the vertical lines on mobile */
+
     /* MOBILE CATALOG & EXPORT 1. Layout: Stack Sidebar and Content vertically */
     .catalog-grid {
         display: block !important; /* Forces elements to stack */
