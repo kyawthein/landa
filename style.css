@@ -2983,7 +2983,6 @@ a.split-card:hover {
     .dist-hero, .import-hero, .export-hero, .about-hero, .contact-hero, .hero {
         padding-top: 140px !important; /* Pushes content down below the logo/menu */
         height: auto !important;       /* Allows content to grow */
-        min-height: 100vh !important;  /* Ensures it covers full screen height */
         background-attachment: scroll !important; /* Fixes background jitter on phones */
     }
 
