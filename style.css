@@ -3045,17 +3045,22 @@ a.split-card:hover {
     }
     /* --- FIX FOR SHIPPING SPECS TABLE --- */
     .logistics-table-box {
-        padding: 15px !important; /* Reduce padding to give table more room */
+        display: block !important;
         width: 100% !important;
-        overflow: hidden; /* Prevents the box itself from breaking layout */
+        padding: 15px !important;
+        
+        /* 1. ENABLE SCROLL ON THE BOX ITSELF */
+        overflow-x: auto !important; 
+        -webkit-overflow-scrolling: touch;
     }
 
-    /* Target the table specifically inside this box */
     .logistics-table-box table {
-        display: block !important;       /* Turns table into a block */
-        width: 100% !important;          /* Full width */
-        overflow-x: auto !important;     /* Enables horizontal scrolling */
-        -webkit-overflow-scrolling: touch; /* Smooth scroll on iPhone */
-        white-space: nowrap;             /* Keeps rows on one line (cleaner scroll) */
+        /* 2. FORCE TABLE TO BE WIDE (Triggers the scroll) */
+        min-width: 650px !important; 
+        width: auto !important;
+        
+        /* Style fixes */
+        border-collapse: collapse;
+        white-space: nowrap; 
     }
 }
