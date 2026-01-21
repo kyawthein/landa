@@ -3043,4 +3043,19 @@ a.split-card:hover {
         height: auto !important;
         background-attachment: scroll !important; /* Fixes jittery bg on phones */
     }
+    /* --- FIX FOR SHIPPING SPECS TABLE --- */
+    .logistics-table-box {
+        padding: 15px !important; /* Reduce padding to give table more room */
+        width: 100% !important;
+        overflow: hidden; /* Prevents the box itself from breaking layout */
+    }
+
+    /* Target the table specifically inside this box */
+    .logistics-table-box table {
+        display: block !important;       /* Turns table into a block */
+        width: 100% !important;          /* Full width */
+        overflow-x: auto !important;     /* Enables horizontal scrolling */
+        -webkit-overflow-scrolling: touch; /* Smooth scroll on iPhone */
+        white-space: nowrap;             /* Keeps rows on one line (cleaner scroll) */
+    }
 }
