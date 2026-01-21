@@ -2968,87 +2968,79 @@ a.split-card:hover {
 
     /* MOBILE CATALOG & EXPORT 1. Layout: Stack Sidebar and Content vertically */
     .catalog-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+        display: block !important; /* Forces elements to stack */
+        padding-top: 20px;
     }
 
-    /* 2. Transform Vertical Sidebar into Horizontal Scroll Menu */
+    /* 2. SIDEBAR AS HORIZONTAL MENU (Pills) */
     .catalog-sidebar {
-        position: relative; /* Stop sticking */
-        top: 0;
-        width: 100vw; /* Full viewport width */
-        margin-left: -20px; /* Pull left to counteract container padding */
-        padding: 0 20px; /* Add padding inside */
-        background: transparent;
-        border: none;
-        margin-bottom: 10px;
+        position: static !important; /* Stops it from floating */
+        width: 100% !important;
+        margin-bottom: 30px !important;
+        padding: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        z-index: 1;
     }
 
     .sidebar-nav {
-        display: flex;
-        overflow-x: auto; /* Enable Horizontal Scroll */
+        display: flex !important;
+        overflow-x: auto !important; /* Allows horizontal scrolling */
         gap: 10px;
-        padding-bottom: 15px;
-        white-space: nowrap; /* Prevent wrapping */
-        -webkit-overflow-scrolling: touch; /* Smooth scroll on iPhone */
-        scrollbar-width: none; /* Hide scrollbar (Firefox) */
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
     }
-
-    /* Hide scrollbar (Chrome/Safari) */
+    
+    /* Hide Scrollbar but keep functionality */
     .sidebar-nav::-webkit-scrollbar { display: none; }
 
-    /* Style Links as "Pills" */
     .sidebar-link {
-        flex: 0 0 auto; /* Don't shrink */
-        background: white;
-        border: 1px solid #eee;
-        border-radius: 50px; /* Pill Shape */
-        padding: 10px 20px;
-        margin: 0;
-        font-size: 0.9rem;
-        color: #555;
-        /* Reset Desktop Styles */
-        border-left: 1px solid #eee; 
+        flex: 0 0 auto; /* Don't shrink the buttons */
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        padding: 8px 16px !important;
+        font-size: 0.85rem;
+        margin: 0 !important;
     }
 
-    /* Active State (Red Pill) */
     .sidebar-link.active {
         background: var(--landa-red);
         color: white;
         border-color: var(--landa-red);
-        padding-left: 20px; /* Reset the shift */
     }
 
-    .sidebar-link .dot { display: none; } /* Hide dots on mobile */
-    .sidebar-header, .sidebar-contact { display: none; } /* Hide text header and contact box */
-
-    /* 3. Product Content Styling */
-    .product-group {
-        padding: 25px 20px; /* Reduce padding */
-        border: 1px solid #eee;
-        box-shadow: none;
+    /* Hide Desktop Sidebar elements */
+    .sidebar-header, .sidebar-contact, .sidebar-link .dot { 
+        display: none !important; 
     }
 
-    .group-header h2 { font-size: 1.6rem; line-height: 1.2; }
-    
-    /* 4. Fix Specs Grid (2 Columns) */
-    .common-specs-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-    }
-
-    /* 5. Fix Table Scrolling */
+    /* 3. TABLE RESPONSIVENESS (The Scroll Fix) */
     .table-responsive {
-        display: block;
-        width: 100%;
-        overflow-x: auto; /* Forces horizontal scroll */
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important; /* Force scrollbar if too wide */
         -webkit-overflow-scrolling: touch;
-        margin-top: 20px;
-        border: 1px solid #f0f0f0;
+        border: 1px solid #eee;
+        background: white;
+    }
+
+    .tech-table {
+        width: 100% !important;
+        min-width: 600px !important; /* Forces table to be wide so it triggers scroll */
+    }
+
+    /* 4. CONTENT PADDING FIX */
+    .product-group {
+        padding: 20px !important; /* Less padding on mobile */
+        margin-bottom: 30px;
     }
     
-    .tech-table {
-        min-width: 600px; /* Ensures table is wide enough to be readable */
+    /* 5. HERO FIX (Ensure text doesn't overlap header) */
+    .export-hero {
+        padding-top: 120px !important;
+        min-height: auto !important;
+        height: auto !important;
+        background-attachment: scroll !important; /* Fixes jittery bg on phones */
     }
 }
