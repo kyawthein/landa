@@ -2906,7 +2906,7 @@ a.split-card:hover {
 /* --- MEDIA QUERY (PHONES) --- */
 @media (max-width: 900px) {
     
-/* 1. Show Hamburger */
+    /* 1. Show Hamburger */
     .hamburger { display: flex !important; }
 
     /* 2. Hide Desktop Button */
@@ -2964,5 +2964,91 @@ a.split-card:hover {
     
     .hero-content {
         padding-bottom: 40px;
+    }
+
+    /* MOBILE CATALOG & EXPORT 1. Layout: Stack Sidebar and Content vertically */
+    .catalog-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* 2. Transform Vertical Sidebar into Horizontal Scroll Menu */
+    .catalog-sidebar {
+        position: relative; /* Stop sticking */
+        top: 0;
+        width: 100vw; /* Full viewport width */
+        margin-left: -20px; /* Pull left to counteract container padding */
+        padding: 0 20px; /* Add padding inside */
+        background: transparent;
+        border: none;
+        margin-bottom: 10px;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        overflow-x: auto; /* Enable Horizontal Scroll */
+        gap: 10px;
+        padding-bottom: 15px;
+        white-space: nowrap; /* Prevent wrapping */
+        -webkit-overflow-scrolling: touch; /* Smooth scroll on iPhone */
+        scrollbar-width: none; /* Hide scrollbar (Firefox) */
+    }
+
+    /* Hide scrollbar (Chrome/Safari) */
+    .sidebar-nav::-webkit-scrollbar { display: none; }
+
+    /* Style Links as "Pills" */
+    .sidebar-link {
+        flex: 0 0 auto; /* Don't shrink */
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 50px; /* Pill Shape */
+        padding: 10px 20px;
+        margin: 0;
+        font-size: 0.9rem;
+        color: #555;
+        /* Reset Desktop Styles */
+        border-left: 1px solid #eee; 
+    }
+
+    /* Active State (Red Pill) */
+    .sidebar-link.active {
+        background: var(--landa-red);
+        color: white;
+        border-color: var(--landa-red);
+        padding-left: 20px; /* Reset the shift */
+    }
+
+    .sidebar-link .dot { display: none; } /* Hide dots on mobile */
+    .sidebar-header, .sidebar-contact { display: none; } /* Hide text header and contact box */
+
+    /* 3. Product Content Styling */
+    .product-group {
+        padding: 25px 20px; /* Reduce padding */
+        border: 1px solid #eee;
+        box-shadow: none;
+    }
+
+    .group-header h2 { font-size: 1.6rem; line-height: 1.2; }
+    
+    /* 4. Fix Specs Grid (2 Columns) */
+    .common-specs-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    /* 5. Fix Table Scrolling */
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto; /* Forces horizontal scroll */
+        -webkit-overflow-scrolling: touch;
+        margin-top: 20px;
+        border: 1px solid #f0f0f0;
+    }
+    
+    .tech-table {
+        min-width: 600px; /* Ensures table is wide enough to be readable */
     }
 }
